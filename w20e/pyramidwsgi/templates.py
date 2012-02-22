@@ -7,8 +7,14 @@ sys.path[0:0] = [
     %(pypath)s,
 ]
 
+INIFILE = "%(config)s"
+
+# init logging
+from paste.script.util.logging_config import fileConfig
+fileConfig(INIFILE)
+
 from pyramid.paster import get_app
-application = get_app("%(config)s", "main")
+application = get_app(INIFILE, "main")
 """
 
 APACHE_SKEL_TEMPLATE = """\
