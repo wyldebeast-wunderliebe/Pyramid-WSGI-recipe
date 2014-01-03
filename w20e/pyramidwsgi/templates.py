@@ -7,22 +7,24 @@ sys.path[0:0] = [
     %(pypath)s,
 ]
 
-from pyramid.paster import get_app
-application = get_app("%(config)s", "main")
+from pyramid.paster import get_app, setup_logging
+ini_path = '%(config)s'
+setup_logging(ini_path)
+application = get_app(ini_path, "main")
 """
 
 APACHE_SKEL_TEMPLATE = """\
 <VirtualHost *:80>
 
-    # If you use ZODB, proesses should be 1, unless you use ZEO. ZODB can handle
-    # only one process. If you run the app in a virtual env, make sure the
-    # process runs as the user and group that can actually access and write to
-    # the directories the app runs in. Also set the python-path to the python
-    # lib of your virtualenv.
+    # If you use ZODB, proesses should be 1, unless you use ZEO. ZODB can
+    # handle only one process. If you run the app in a virtual env, make sure
+    # the process runs as the user and group that can actually access and
+    # write to the directories the app runs in. Also set the python-path to
+    # the python lib of your virtualenv.
     #
 
     ServerAdmin <your email address>
-    ServerName <your virtual host> 
+    ServerName <your virtual host>
 
     WSGIScriptAlias / %(script_path)s/%(script_name)s.wsgi
     WSGIDaemonProcess %(script_name)s user=<user that the app runs as> \

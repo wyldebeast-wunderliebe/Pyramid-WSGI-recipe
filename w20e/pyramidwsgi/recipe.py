@@ -1,7 +1,5 @@
 import stat
-import re
 import os
-import pkg_resources
 import zc.buildout
 from zc.recipe.egg.egg import Eggs
 from templates import WSGI_TEMPLATE, APACHE_SKEL_TEMPLATE
@@ -29,13 +27,14 @@ class WSGI(object):
         extra_paths = extra_paths.split()
         path.extend(extra_paths)
 
-        template_vars = {'python': self.buildout['buildout']['executable'],
-                         'pypath': ",\n    ".join((repr(p) for p in path)),
-                         'config': self.options['ini_file'],
-                         'buildout_dir': self.buildout['buildout']['directory'],
-                         'script_path': bin_dir,
-                         'script_name': self.options['script_name']
-                         }
+        template_vars = {
+            'python': self.buildout['buildout']['executable'],
+            'pypath': ",\n    ".join((repr(p) for p in path)),
+            'config': self.options['ini_file'],
+            'buildout_dir': self.buildout['buildout']['directory'],
+            'script_path': bin_dir,
+            'script_name': self.options['script_name']
+            }
 
         wsgi_script = '%s/%s.wsgi' % (bin_dir, self.options['script_name'])
 
