@@ -8,7 +8,7 @@ README = open('README.rst').read()
 CHANGES = ""
 version = "1.0.0"
 
-requires = []
+requires = ['distribute',]
 
 setup(name='w20e.pyramidwsgi.recipe',
       version=version,
@@ -26,6 +26,7 @@ setup(name='w20e.pyramidwsgi.recipe',
       url='',
       keywords='wsgi pylons pyramid',
       packages=find_packages(),
+      namespace_packages=['w20e'],
       include_package_data=True,
       zip_safe=False,
       install_requires=requires,
