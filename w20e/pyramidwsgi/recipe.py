@@ -2,7 +2,7 @@ import stat
 import os
 import zc.buildout
 from zc.recipe.egg.egg import Eggs
-from templates import WSGI_TEMPLATE, APACHE_SKEL_TEMPLATE
+from .templates import WSGI_TEMPLATE, APACHE_SKEL_TEMPLATE
 
 
 class WSGI(object):
